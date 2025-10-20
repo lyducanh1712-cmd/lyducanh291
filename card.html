@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thiệp 20/10 – 29lda 💌</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;500&display=swap');
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+    }
+    .card {
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.6);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.3);
+      backdrop-filter: blur(6px);
+      z-index: 2;
+    }
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 42px;
+      color: #ff69b4;
+    }
+    h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 28px;
+      margin-top: 5px;
+    }
+    p {
+      border: 2px dashed #f78fb3;
+      border-radius: 15px;
+      padding: 15px;
+      margin: 15px;
+      background: rgba(255,255,255,0.3);
+      color: #fff;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    .sender { margin-top: 10px; font-size: 18px; color: #fff; }
+    img {
+      width: 250px;
+      border-radius: 15px;
+      margin-top: 15px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+    canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/02/07/audio_4a2cb7312f.mp3?filename=piano-love-song-139571.mp3" type="audio/mpeg">
+  </audio>
+
+  <canvas id="hearts"></canvas>
+
+  <div class="card">
+    <h1>💖 Chúc Mừng 20/10 💖</h1>
+    <h2>Gửi Honghanh thân yêu 💕</h2>
+    <p>Chúc cho người đọc tấm thiệp này luôn luôn xinh đẹp, mạnh khỏe, vui vẻ, hạnh phúc, đạt được nhiều thành công hơn trong cuộc sống và sớm có người thương nhaaaaaaa 💗</p>
+    <img src="1.png" alt="Ảnh Honghanh">
+    <div class="sender">— From 29lda with luv 💗</div>
+  </div>
+
+  <script>
+    const canvas=document.getElementById('hearts');
+    const ctx=canvas.getContext('2d');
+    let hearts=[];
+    function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
+    window.addEventListener('resize',resize);resize();
+    class Heart{
+      constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height-canvas.height;this.size=Math.random()*15+10;this.speed=Math.random()+0.5;this.alpha=Math.random()*0.5+0.5;}
+      draw(){ctx.save();ctx.translate(this.x,this.y);ctx.scale(this.size/20,this.size/20);ctx.beginPath();ctx.moveTo(0,6);ctx.bezierCurveTo(0,3,-3,0,-6,0);ctx.bezierCurveTo(-12,0,-12,6,-12,6);ctx.bezierCurveTo(-12,12,0,18,0,24);ctx.bezierCurveTo(0,18,12,12,12,6);ctx.bezierCurveTo(12,6,12,0,6,0);ctx.bezierCurveTo(3,0,0,3,0,6);ctx.closePath();ctx.fillStyle=`rgba(255,182,193,${this.alpha})`;ctx.fill();ctx.restore();}
+      update(){this.y+=this.speed;if(this.y>canvas.height+20){this.y=-20;this.x=Math.random()*canvas.width;}}
+    }
+    for(let i=0;i<80;i++)hearts.push(new Heart());
+    (function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);for(const h of hearts){h.update();h.draw();}requestAnimationFrame(animate);})();
+  </script>
+</body>
+</html>
